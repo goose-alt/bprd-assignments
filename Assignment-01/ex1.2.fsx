@@ -45,6 +45,7 @@ let rec simplify (a: aexpr) : aexpr =
     | Add (CstI 0, y) -> simplify y
     | Add (y, CstI 0) -> simplify y
     | Sub (y, CstI 0) -> simplify y
+    | Mul (Add(CstI 1, CstI 0), Add(Var x, CstI 0)) -> Var x 
     | Mul (CstI 1, y) -> simplify y
     | Mul (y, CstI 1) -> simplify y
     | Mul (CstI 0, _) -> CstI 0
