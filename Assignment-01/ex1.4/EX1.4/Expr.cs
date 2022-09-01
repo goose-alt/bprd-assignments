@@ -1,6 +1,9 @@
 namespace EX1._4
 {
-    public abstract class Expr {}
+    public abstract class Expr 
+    {
+        public abstract int Eval(Stack<(string Name, int Value)> env);
+    }
 
     public class CstI : Expr
     {
@@ -10,6 +13,10 @@ namespace EX1._4
         {
             Value = i;            
         }
+
+        public override string ToString() => Value.ToString();
+
+        public override int Eval(Stack<(string Name, int Value)> env) => Value;
     }
 
     public class Var : Expr
@@ -20,6 +27,10 @@ namespace EX1._4
         {
             Variable = variable;   
         }
+
+        public override string ToString() => Variable;
+
+        public override int Eval(Stack<(string Name, int Value)> env) => env.First(x => x.Name == Variable).Value;
     }
 
     public abstract class Binop : Expr 
@@ -46,10 +57,9 @@ namespace EX1._4
             : base('+', expr1, expr2)
         {}
 
-        public override string ToString()
-        {
-            return $"{_expr1} + {_expr2}";
-        }
+        public override int Eval(Stack<(string Name, int Value)> env) => _expr1.Eval(env) + _expr2.Eval(env);
+
+        public override string ToString() => $"({_expr1} + {_expr2})";
     }
 
     public class Mul : Binop
@@ -58,7 +68,9 @@ namespace EX1._4
             : base('*', expr1, expr2)
         {}
 
-        public override string ToString() => $"{_expr1} * {_expr2}";
+        public override int Eval(Stack<(string Name, int Value)> env) => _expr1.Eval(env) * _expr2.Eval(env);
+
+        public override string ToString() => $"({_expr1} * {_expr2})";
     }
 
     public class Sub : Binop
@@ -67,6 +79,8 @@ namespace EX1._4
             : base('-', expr1, expr2)
         {}
 
-        public override string ToString() => $"{_expr1} - {_expr2}";
+        public override int Eval(Stack<(string Name, int Value)> env) => _expr1.Eval(env) - _expr2.Eval(env);
+
+        public override string ToString() => $"({_expr1} - {_expr2})";
     }
 }
