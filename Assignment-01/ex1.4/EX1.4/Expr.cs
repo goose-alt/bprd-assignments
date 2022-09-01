@@ -43,9 +43,9 @@ namespace EX1._4
     {
         public char Operator { get; }
 
-        protected readonly Expr _expr1;
+        protected Expr _expr1;
 
-        protected readonly Expr _expr2; 
+        protected Expr _expr2; 
 
         public Binop(char opr, Expr expr1, Expr expr2)
         {
@@ -53,6 +53,23 @@ namespace EX1._4
             _expr1 = expr1;
             _expr2 = expr2;
         }
+
+        public override Expr Simplify() 
+        {
+            // Perform a bottom-up approach
+            _expr1 = _expr1.Simplify();
+            _expr2 = _expr2.Simplify();
+
+
+            return SimplifyExpression(); // Perform the actual simplification of the current expression
+        }
+
+        /// <summary>
+        /// Simplifies this expression by looking at the other expressions.
+        /// If this cannot be simplified then nothing is going to change
+        /// </summary>
+        /// <returns>A simplified version of the following expression if possible</returns>
+        protected abstract Expr SimplifyExpression();
     }
 
     public class Add : Binop
@@ -63,14 +80,14 @@ namespace EX1._4
 
         public override int Eval(Stack<(string Name, int Value)> env) => _expr1.Eval(env) + _expr2.Eval(env);
 
-        public override Expr Simplify() => (_expr1, _expr2) switch
+        public override string ToString() => $"({_expr1} + {_expr2})";
+
+        protected override Expr SimplifyExpression() => (_expr1, _expr2) switch
         {
-            (CstI val, Expr ex) when (val.Value == 0) => ex.Simplify(),
-            (Expr ex, CstI val) when (val.Value == 0) => ex.Simplify(),
+            (CstI val, Expr ex) when (val.Value == 0) => ex,
+            (Expr ex, CstI val) when (val.Value == 0) => ex,
             _ => this
         };
-
-        public override string ToString() => $"({_expr1} + {_expr2})";
     }
 
     public class Mul : Binop
@@ -80,6 +97,17 @@ namespace EX1._4
         {}
 
         public override int Eval(Stack<(string Name, int Value)> env) => _expr1.Eval(env) * _expr2.Eval(env);
+
+        
+
+        protected override Expr SimplifyExpression() => (_expr1, _expr2) switch
+        {
+            (CstI c, Expr ex) when (c.Value == 1) => ex,
+            (Expr ex, CstI c) when (c.Value == 1) => ex,
+            (CstI c, Expr ex) when (c.Value == 0) => new CstI(0),
+            (Expr ex, CstI c) when (c.Value == 0) => new CstI(0),
+            _ => this
+        };
 
         public override string ToString() => $"({_expr1} * {_expr2})";
     }
@@ -91,20 +119,12 @@ namespace EX1._4
         {}
 
         public override int Eval(Stack<(string Name, int Value)> env) => _expr1.Eval(env) - _expr2.Eval(env);
-
-        public override Expr Simplify() => (_expr1, _expr2) switch 
+        
+        protected override Expr SimplifyExpression()=> (_expr1, _expr2) switch 
         {
             (Expr ex, CstI val) when (val.Value == 0) => ex.Simplify(),
-            _ => SimplifyExpressions()
+            _ => this
         };
-
-        private Expr SimplifyExpressions()
-        {
-            _expr1.Simplify();
-            _expr2.Simplify();
-
-            return this;
-        }
 
         public override string ToString() => $"({_expr1} - {_expr2})";
     }
