@@ -14,3 +14,5 @@ System.Console.WriteLine(expr3);
 
 System.Console.WriteLine($"Before Simplification: {simplifyExample}");
 System.Console.WriteLine($"After Simplification: {simplifyExample.Simplify()}");
+
+System.Console.WriteLine($"Example of no simplification: {expr1.Simplify()}");

@@ -122,7 +122,8 @@ namespace EX1._4
         
         protected override Expr SimplifyExpression()=> (_expr1, _expr2) switch 
         {
-            (Expr ex, CstI val) when (val.Value == 0) => ex.Simplify(),
+            (CstI c1, CstI c2) when (c1.Value == c2.Value) => new CstI(0),
+            (Expr ex, CstI val) when (val.Value == 0) => ex,
             _ => this
         };
 
