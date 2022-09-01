@@ -27,4 +27,4 @@ and bind (lis : (string * expr) list) (env : (string * int) list) =
     | (x,e)::li ->
                     let xval = eval e env
                     let env1 = (x, xval) :: env 
-                    bind li env1     
+                    bind li env1;;     
