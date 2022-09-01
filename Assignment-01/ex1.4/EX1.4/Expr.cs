@@ -64,6 +64,8 @@ namespace EX1._4
             return SimplifyExpression(); // Perform the actual simplification of the current expression
         }
 
+        public override string ToString() => $"({_expr1} {Operator} {_expr2})";
+
         /// <summary>
         /// Simplifies this expression by looking at the other expressions.
         /// If this cannot be simplified then nothing is going to change
@@ -79,8 +81,6 @@ namespace EX1._4
         {}
 
         public override int Eval(Stack<(string Name, int Value)> env) => _expr1.Eval(env) + _expr2.Eval(env);
-
-        public override string ToString() => $"({_expr1} + {_expr2})";
 
         protected override Expr SimplifyExpression() => (_expr1, _expr2) switch
         {
@@ -108,8 +108,6 @@ namespace EX1._4
             (Expr ex, CstI c) when (c.Value == 0) => new CstI(0),
             _ => this
         };
-
-        public override string ToString() => $"({_expr1} * {_expr2})";
     }
 
     public class Sub : Binop
@@ -126,7 +124,5 @@ namespace EX1._4
             (Expr ex, CstI val) when (val.Value == 0) => ex,
             _ => this
         };
-
-        public override string ToString() => $"({_expr1} - {_expr2})";
     }
 }
