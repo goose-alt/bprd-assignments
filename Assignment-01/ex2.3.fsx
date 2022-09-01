@@ -11,6 +11,9 @@ type texpr =                            (* target expressions *)
   | TPrim of string * texpr * texpr;;
 
 
+// Test expression
+let expr = Let ([("x1", Prim("+", CstI 5, CstI 7)); ("x2", Prim("*", Var "x1", CstI 2))], Prim("+", Var "x1", Var "x2"));;
+
 (* Map variable name to variable index at compile-time *)
 
 let rec getindex vs x = 
