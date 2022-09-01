@@ -31,4 +31,6 @@ and bind erhs cenv ebody =
   | [] -> failwith "Missing 'let' expression" // There needs to be at least one let expression in order to compute the next expression
   | (x, xExpr ) :: [] -> x :: cenv 
                                         |> fun cenv1 -> TLet(tcomp xExpr cenv, tcomp ebody cenv1)
-  | (x, xExpr) :: xs -> x :: cenv |> fun cenv1 -> TLet(tcomp xExpr cenv, bind xs cenv1 ebody);;
+  | (x, xExpr) :: xs -> x :: cenv 
+                                                              |> fun cenv1 -> TLet(tcomp xExpr cenv, bind xs cenv1 ebody);;
+
