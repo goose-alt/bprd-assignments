@@ -3,6 +3,8 @@ namespace EX1._4
     public abstract class Expr 
     {
         public abstract int Eval(Stack<(string Name, int Value)> env);
+
+        public abstract Expr Simplify();
     }
 
     public class CstI : Expr
@@ -17,6 +19,8 @@ namespace EX1._4
         public override string ToString() => Value.ToString();
 
         public override int Eval(Stack<(string Name, int Value)> env) => Value;
+
+        public override Expr Simplify() => this;
     }
 
     public class Var : Expr
@@ -31,6 +35,8 @@ namespace EX1._4
         public override string ToString() => Variable;
 
         public override int Eval(Stack<(string Name, int Value)> env) => env.First(x => x.Name == Variable).Value;
+
+        public override Expr Simplify() => this;
     }
 
     public abstract class Binop : Expr 
@@ -47,8 +53,6 @@ namespace EX1._4
             _expr1 = expr1;
             _expr2 = expr2;
         }
-
-        
     }
 
     public class Add : Binop
@@ -58,6 +62,13 @@ namespace EX1._4
         {}
 
         public override int Eval(Stack<(string Name, int Value)> env) => _expr1.Eval(env) + _expr2.Eval(env);
+
+        public override Expr Simplify() => (_expr1, _expr2) switch
+        {
+            (CstI val, Expr ex) when (val.Value == 0) => ex.Simplify(),
+            (Expr ex, CstI val) when (val.Value == 0) => ex.Simplify(),
+            _ => this
+        };
 
         public override string ToString() => $"({_expr1} + {_expr2})";
     }
@@ -80,6 +91,20 @@ namespace EX1._4
         {}
 
         public override int Eval(Stack<(string Name, int Value)> env) => _expr1.Eval(env) - _expr2.Eval(env);
+
+        public override Expr Simplify() => (_expr1, _expr2) switch 
+        {
+            (Expr ex, CstI val) when (val.Value == 0) => ex.Simplify(),
+            _ => SimplifyExpressions()
+        };
+
+        private Expr SimplifyExpressions()
+        {
+            _expr1.Simplify();
+            _expr2.Simplify();
+
+            return this;
+        }
 
         public override string ToString() => $"({_expr1} - {_expr2})";
     }
