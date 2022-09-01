@@ -21,10 +21,14 @@ let rec getindex vs x =
 (* Compiling from expr to texpr *)
 
 let rec tcomp (e : expr) (cenv : string list) : texpr =
-    match e with
-    | CstI i -> TCstI i
-    | Var x  -> TVar (getindex cenv x)
-    | Let(x, erhs, ebody) -> 
-      let cenv1 = x :: cenv 
-      TLet(tcomp erhs cenv, tcomp ebody cenv1)
-    | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);;
+  match e with
+  | CstI i -> TCstI i
+  | Var x  -> TVar (getindex cenv x)
+  | Let(erhs, ebody) -> bind erhs cenv ebody
+  | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv)
+and bind erhs cenv ebody = 
+  match erhs with
+  | [] -> failwith "Missing 'let' expression" // There needs to be at least one let expression in order to compute the next expression
+  | (x, xExpr ) :: [] -> x :: cenv 
+                                        |> fun cenv1 -> TLet(tcomp xExpr cenv, tcomp ebody cenv1)
+  | (x, xExpr) :: xs -> x :: cenv |> fun cenv1 -> TLet(tcomp xExpr cenv, bind xs cenv1 ebody);;
