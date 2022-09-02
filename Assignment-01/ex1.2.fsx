@@ -38,14 +38,13 @@ let rec fmt (a: aexpr) : string =
     | Mul (x, y) -> $"({fmt x} * {fmt y})"
     | Sub (x, y) -> $"({fmt x} - {fmt y})"
 
-let rec simplify (a: aexpr) : aexpr = 
+let rec basicSimplify (a: aexpr) : aexpr = 
     match a with
     | CstI i -> CstI i
     | Var x -> Var x
     | Add (CstI 0, y) -> simplify y
     | Add (y, CstI 0) -> simplify y
     | Sub (y, CstI 0) -> simplify y
-    | Mul (Add(CstI 1, CstI 0), Add(Var x, CstI 0)) -> Var x 
     | Mul (CstI 1, y) -> simplify y
     | Mul (y, CstI 1) -> simplify y
     | Mul (CstI 0, _) -> CstI 0
@@ -54,6 +53,13 @@ let rec simplify (a: aexpr) : aexpr =
     | Add (x, y) -> Add(simplify x, simplify y)
     | Mul (x, y) -> Mul(simplify x, simplify y)
     | Sub (x, y) -> Sub(simplify x, simplify y)
+and simplify (a: aexpr) : aexpr = 
+    match a with
+    | CstI i -> CstI i
+    | Var x -> Var x
+    | Add (x, y) -> basicSimplify (Add(basicSimplify x, basicSimplify y))
+    | Mul (x, y) -> basicSimplify (Mul(basicSimplify x, basicSimplify y))
+    | Sub (x, y) -> basicSimplify (Sub(basicSimplify x, basicSimplify y))
 
 let rec diff (a: aexpr) (var: string) =
     match a with
