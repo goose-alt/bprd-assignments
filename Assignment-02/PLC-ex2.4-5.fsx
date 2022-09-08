@@ -28,3 +28,6 @@ let assemble instrs =
 let intsToFile (inss : int list) (fname : string) = 
     let text = String.concat " " (List.map string inss)
     System.IO.File.WriteAllText(fname, text);;
+
+// Reconstruction of the instructions from the exercise description
+let instr = [SCstI 17; SVar 0; SVar 1; SAdd; SSwap; SPop];;
