@@ -1,7 +1,8 @@
 ##Exercise BCD 2.1
 ###a 
-'42'
+`42`
 ###b
+`/^(?!42$)\d+$/gm`
 ###c  
 
 ##Exercise BCD 2.2
