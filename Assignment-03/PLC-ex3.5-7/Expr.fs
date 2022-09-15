@@ -39,6 +39,7 @@ let rec fmt1 (e : expr) : string =
             String.concat " " ["let"; x; "="; fmt1 erhs;
                                "in"; fmt1 ebody; "end"]
       | Prim(ope, e1, e2) -> String.concat "" ["("; fmt1 e1; ope; fmt1 e2; ")"]
+      | If(e1, e2, e3) -> String.concat " " ["if"; fmt1 e1; "then"; fmt1 e2; "else"; fmt1 e3]
 
 (* Format expressions as strings, avoiding excess parentheses *)
 
@@ -55,6 +56,7 @@ let rec fmt2 (ctxpre : int) (e : expr) =
                | "-" -> wrappar ctxpre 6 [fmt2 5 e1; ope; fmt2 6 e2]
                | "*" -> wrappar ctxpre 7 [fmt2 6 e1; ope; fmt2 7 e2]
                | _   -> raise (Failure "unknown primitive"))
+      | If(e1, e2, e3) -> String.concat " " ["if"; fmt2 1 e1; "then"; fmt2 1 e2; "else"; fmt2 1 e3]
 
 and wrappar ctxpre pre ss = 
     if pre <= ctxpre then String.concat "" ("(" :: ss @ [")"])
@@ -82,6 +84,7 @@ let rec eval (e : expr) (env : (string * int) list) : int =
       | Prim("+", e1, e2) -> eval e1 env + eval e2 env
       | Prim("*", e1, e2) -> eval e1 env * eval e2 env
       | Prim("-", e1, e2) -> eval e1 env - eval e2 env
+      | If(e1, e2, e3)    -> if not (eval e1 env = 0) then eval e2 env else eval e3 env
       | Prim _            -> raise (Failure "unknown primitive")
 
 (* Evaluate in empty environment: expression must have no free variables: *)
