@@ -25,4 +25,7 @@ val e2: Absyn.expr =
 val it: int = 6561
 
 //3
+let e3 = fromString "let plus n = if 0<n then e2 n + plus n-1 else 1 in plus 11 end";;
+let e3 = fromString "let power n = if 0 < n then 3 * power (n-1) else 1 in let plus m = if 0 < m then (power m) + (plus (m-1)) else 1 in plus 11 end end";;
+
 //4
