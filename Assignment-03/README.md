@@ -1,3 +1,5 @@
+## PLC 3.3-4
+All answers to the PLC question 3.3 and 3.4 can be found in the `./PLC-ex3.3-4.pdf`.
 
 ## PLC 3.5-7
 PLC 3.5-7 can be found in the folder PLC-ex3.5-7.
