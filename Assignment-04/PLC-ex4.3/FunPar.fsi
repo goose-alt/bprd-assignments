@@ -25,6 +25,7 @@ type token =
   | THEN
   | TRUE
   | CSTBOOL of (bool)
+  | PARAMS of (string list)
   | NAME of (string)
   | CSTINT of (int)
 type tokenId = 
@@ -52,6 +53,7 @@ type tokenId =
     | TOKEN_THEN
     | TOKEN_TRUE
     | TOKEN_CSTBOOL
+    | TOKEN_PARAMS
     | TOKEN_NAME
     | TOKEN_CSTINT
     | TOKEN_end_of_input
