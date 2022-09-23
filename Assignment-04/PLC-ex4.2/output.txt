@@ -48,3 +48,7 @@ val e3: Absyn.expr =
 
 > run e3;;
 val it: int = 1093
+
+//4
+
+let e4 = fromString "let power x n = if 0 < n then x * power (n-1) else 1 in (let plus m = if 0<m then (power m 8) + plus (m-1) else 0) in plus 10 end end";;
