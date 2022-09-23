@@ -62,8 +62,8 @@ AtExpr:
 ;
 
 AppExpr:
-    AtExpr AtExpr                       { Call($1, $2)           }
-  | AppExpr AtExpr                      { Call($1, $2)           }
+    AtExpr AtExpr                       { Call($1, [$2])           }
+  | AppExpr AtExpr                      { Call($1, [$2])           }
 ;
 
 Const:
