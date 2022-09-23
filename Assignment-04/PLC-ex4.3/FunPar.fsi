@@ -25,7 +25,6 @@ type token =
   | THEN
   | TRUE
   | CSTBOOL of (bool)
-  | PARAMS of (string list)
   | NAME of (string)
   | CSTINT of (int)
 type tokenId = 
@@ -53,7 +52,6 @@ type tokenId =
     | TOKEN_THEN
     | TOKEN_TRUE
     | TOKEN_CSTBOOL
-    | TOKEN_PARAMS
     | TOKEN_NAME
     | TOKEN_CSTINT
     | TOKEN_end_of_input
@@ -64,6 +62,7 @@ type nonTerminalId =
     | NONTERM_Expr
     | NONTERM_AtExpr
     | NONTERM_AppExpr
+    | NONTERM_Params
     | NONTERM_Const
 /// This function maps tokens to integer indexes
 val tagOfToken: token -> int
