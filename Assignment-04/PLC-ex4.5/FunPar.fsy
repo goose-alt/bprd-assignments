@@ -13,13 +13,13 @@
 
 %token ELSE END FALSE IF IN LET NOT THEN TRUE
 %token PLUS MINUS TIMES DIV MOD
-%token EQ NE GT LT GE LE
+%token EQ NE GT LT GE LE LAND LOR
 %token LPAR RPAR 
 %token EOF
 
 %left ELSE              /* lowest precedence  */
 %left EQ NE 
-%left GT LT GE LE
+%left GT LT GE LE LAND LOR
 %left PLUS MINUS
 %left TIMES DIV MOD 
 %nonassoc NOT           /* highest precedence  */
@@ -51,6 +51,8 @@ Expr:
   | Expr LT    Expr                     { Prim("<",  $1, $3)     }
   | Expr GE    Expr                     { Prim(">=", $1, $3)     }
   | Expr LE    Expr                     { Prim("<=", $1, $3)     }
+  | Expr LAND  Expr                     { If($1, $2, false)      }
+  | Expr LOR   Expr                     { If($1, true, $2)       }
 ;
 
 AtExpr:
