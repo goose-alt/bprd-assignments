@@ -10,6 +10,8 @@ type token =
   | LT
   | GE
   | LE
+  | LAND
+  | LOR
   | PLUS
   | MINUS
   | TIMES
@@ -37,6 +39,8 @@ type tokenId =
     | TOKEN_LT
     | TOKEN_GE
     | TOKEN_LE
+    | TOKEN_LAND
+    | TOKEN_LOR
     | TOKEN_PLUS
     | TOKEN_MINUS
     | TOKEN_TIMES

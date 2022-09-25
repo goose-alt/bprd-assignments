@@ -51,8 +51,8 @@ Expr:
   | Expr LT    Expr                     { Prim("<",  $1, $3)     }
   | Expr GE    Expr                     { Prim(">=", $1, $3)     }
   | Expr LE    Expr                     { Prim("<=", $1, $3)     }
-  | Expr LAND  Expr                     { If($1, $2, false)      }
-  | Expr LOR   Expr                     { If($1, true, $2)       }
+  | Expr LAND  Expr                     { If($1, $3, Prim("=",  CstI 0, CstI 1))      }
+  | Expr LOR   Expr                     { If($1, Prim("=",  CstI 1, CstI 1), $3)       }
 ;
 
 AtExpr:
