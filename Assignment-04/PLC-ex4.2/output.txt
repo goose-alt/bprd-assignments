@@ -48,3 +48,31 @@ val e3: Absyn.expr =
 
 > run e3;;
 val it: int = 1093
+
+//4
+> let e4 = fromString "let power x = x * x * x * x * x * x * x * x in let plus n = if 0<n then power n + plus (n-1) else 0 in plus 10 end end";;
+val e4 : Absyn.expr =
+  Letfun
+    ("power", "x",
+     Prim
+       ("*",
+        Prim
+          ("*",
+           Prim
+             ("*",
+              Prim
+                ("*",
+                 Prim
+                   ("*", Prim ("*", Prim ("*", Var "x", Var "x"), Var "x"),
+                    Var "x"), Var "x"), Var "x"), Var "x"), Var "x"),
+     Letfun
+       ("plus", "n",
+        If
+          (Prim ("<", CstI 0, Var "n"),
+           Prim
+             ("+", Call (Var "power", Var "n"),
+              Call (Var "plus", Prim ("-", Var "n", CstI 1))), CstI 0),
+        Call (Var "plus", CstI 10)))
+
+> run e4;;                                                                                                                                      
+val it : int = 167731333
