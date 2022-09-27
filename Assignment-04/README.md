@@ -2,6 +2,12 @@
 We ran the commands in the Readme.txt. The results from running those commands can be 
 found in the PLC-ex4.1/result.txt.
 
+## PLC 4.2
+We have created each of the different functions in our language. We have typed it in the 
+F# interactive terminal and saved the results in the PLC-ex4.2/output.txt.
+
+To get a better overview of the functions created see: PLC-ex4.3/PLC-ex4.2.fs
+
 ## PLC 4.3
 The changed files are:
 - PLC-ex4.3/Absyn.fs line 12
