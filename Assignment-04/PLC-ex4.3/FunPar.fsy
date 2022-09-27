@@ -28,6 +28,7 @@
 %type <Absyn.expr> Main Expr AtExpr Const
 %type <Absyn.expr> AppExpr
 %type <string list> Params
+%type <Absyn.expr list> ExprEnv
 
 %%
 
@@ -61,9 +62,12 @@ AtExpr:
   | LPAR Expr RPAR                      { $2                     }
 ;
 
+ExprEnv: 
+  AtExpr                                { [$1]                  }
+  | AtExpr ExprEnv                      { $1 :: $2              }
+
 AppExpr:
-    AtExpr AtExpr                       { Call($1, [$2])           }
-  | AppExpr AtExpr                      { Call($1, [$2])           }
+    AtExpr ExprEnv                       { Call($1, $2)           }
 ;
 
 Params:

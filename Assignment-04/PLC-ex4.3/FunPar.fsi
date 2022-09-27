@@ -61,6 +61,7 @@ type nonTerminalId =
     | NONTERM_Main
     | NONTERM_Expr
     | NONTERM_AtExpr
+    | NONTERM_ExprEnv
     | NONTERM_AppExpr
     | NONTERM_Params
     | NONTERM_Const
