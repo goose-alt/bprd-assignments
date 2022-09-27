@@ -1,3 +1,7 @@
+## PLC 4.1
+We ran the commands in the Readme.txt. The results from running those commands can be 
+found in the PLC-ex4.1/result.txt.
+
 ## PLC 4.3
 The changed files are:
 - PLC-ex4.3/Absyn.fs line 12
