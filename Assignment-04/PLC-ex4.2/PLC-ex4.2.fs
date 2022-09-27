@@ -12,3 +12,7 @@ run e2;;
 //3
 let e3 = fromString "let power x = if 0 < x then 3 * power (x-1) else 1 in let plus n = if 0<n then power n + plus (n-1) else 1 in plus 6 end end";;
 run e3;;
+
+// 4
+let e4 = fromString "let power x = x * x * x * x * x * x * x * x in let plus n = if 0<n then power n + plus (n-1) else 0 in plus 10 end end";;
+run e4;;
