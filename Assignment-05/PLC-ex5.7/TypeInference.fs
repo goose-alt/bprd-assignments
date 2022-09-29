@@ -53,6 +53,7 @@ type typ =
      | TypB                                (* booleans                   *)
      | TypF of typ * typ                   (* (argumenttype, resulttype) *)
      | TypV of typevar                     (* type variable              *)
+     | TypL of typ                         (* lists                      *)
 
 and tyvarkind =  
      | NoLink of string                    (* uninstantiated type var.   *)
@@ -106,6 +107,7 @@ let rec freeTypeVars t : typevar list =
     | TypB        -> []
     | TypV tv     -> (*(printfn "%s" ("found free tyvar"));*) [tv]
     | TypF(t1,t2) -> union(freeTypeVars t1, freeTypeVars t2)
+    | TypL tl     -> freeTypeVars tl
 
 let occurCheck tyvar tyvars =                     
     if mem tyvar tyvars then failwith "type error: circularity" else ()
@@ -134,6 +136,7 @@ let rec typeToString t : string =
     | TypB         -> "bool"
     | TypV _       -> failwith "typeToString impossible"
     | TypF(t1, t2) -> "function"
+    | TypL _       -> "list"
 
 (* Pretty-print type, using names 'a, 'b, ... for type variables *)
 
@@ -147,6 +150,7 @@ let rec showType t : string =
           | (NoLink name, _) -> name
           | _                -> failwith "showType impossible"
         | TypF(t1, t2) -> "(" + pr t1 + " -> " + pr t2 + ")"
+        | TypL tl      -> "List<" + pr tl + ">"
     pr t 
 
 let rec showTEnv tenv =
@@ -176,11 +180,13 @@ let rec unify t1 t2 : unit =
       if tv1 = tv2                then () 
       else if tv1level < tv2level then linkVarToType tv1 t2'
                                   else linkVarToType tv2 t1'
+    | (TypL t1, TypL t2)   -> unify t1 t2
     | (TypV tv1, _       ) -> linkVarToType tv1 t2'
     | (_,        TypV tv2) -> linkVarToType tv2 t1'
     | (TypI,     t) -> failwith ("type error: int and " + typeToString t)
     | (TypB,     t) -> failwith ("type error: bool and " + typeToString t)
     | (TypF _,   t) -> failwith ("type error: function and " + typeToString t)
+    | (TypL _,   t) -> failwith ("type error: list and " + typeToString t)
 
 (* Generate fresh type variables *)
 
@@ -221,6 +227,7 @@ let rec copyType subst t : typ =
                        | (LinkTo t1, _) -> copyType subst t1
       loop subst
     | TypF(t1,t2) -> TypF(copyType subst t1, copyType subst t2)
+    | TypL tl     -> TypL(copyType subst tl)
     | TypI        -> TypI
     | TypB        -> TypB
 
