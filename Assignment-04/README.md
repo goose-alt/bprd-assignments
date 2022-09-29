@@ -19,7 +19,26 @@ The changed files and lines are:
 - PLC-ex4.3-4/Absyn.fs      --> line 13
 - PLC-ex4.3-4/FunPar.fsy    --> line 31 and 65-71
 
+### Example execution
+```
+> run (fromString "let add x y = x + y in add 1 2 end");;
+val it : int = 3
+
+> run (fromString "let addMore x y z = x + y + z in addMore 1 2 3 end");;
+val it : int = 6
+```
+
 ## PLC 4.5
 The changed files and lines are:
 - PLC-ex4.5/FunLex.fsi --> line 51-52
 - PLC-ex4.5/FunPar.fsy --> line 16, line 22, and line 54-55
+
+### How to run
+PLC 4.5 needs to use `Absyn.fs` and `Fun.fs` from PLC-ex4.3-4, and Parse.fs from the course Github.
+
+### Example execution
+```
+> run (fromString "let f x = if x=1 && 2=2 then 1 else 2 in f 1 end");;
+val it : int = 1
+```
+
