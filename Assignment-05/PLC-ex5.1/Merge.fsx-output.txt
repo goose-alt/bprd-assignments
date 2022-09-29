@@ -1,0 +1,10 @@
+#load "Merge.fsx";;
+[Loading /Users/andreastietgen/Documents/Programmering/UNI/ProgrammerSomData/bprd-assignments/Assignment-05/PLC-ex5.1/Merge.fsx]
+namespace FSI_0010
+  val merge: a: 'a list -> b: 'a list -> 'a list when 'a: comparison
+  val res: int list
+
+> open Merge;;       
+> res;;
+
+val it: int list = [2; 3; 3; 4; 5; 7; 12]
