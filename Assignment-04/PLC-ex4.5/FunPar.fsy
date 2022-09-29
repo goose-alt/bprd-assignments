@@ -18,8 +18,8 @@
 %token EOF
 
 %left ELSE              /* lowest precedence  */
-%left EQ NE 
-%left GT LT GE LE LAND LOR
+%left EQ NE LAND LOR
+%left GT LT GE LE
 %left PLUS MINUS
 %left TIMES DIV MOD 
 %nonassoc NOT           /* highest precedence  */
