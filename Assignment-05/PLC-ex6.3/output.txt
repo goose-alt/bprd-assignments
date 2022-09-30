@@ -1,0 +1,8 @@
+let e1 = fromString "let add x = fun y -> x+y in add 2 5 end";;
+val e1 : Absyn.expr =
+  Letfun
+    ("add", "x", Fun ("y", Prim ("+", Var "x", Var "y")),
+     Call (Call (Var "add", CstI 2), CstI 5))
+
+> let e1 = fromString " fun y -> y";;                            
+val e1 : Absyn.expr = Fun ("y", Var "y")
