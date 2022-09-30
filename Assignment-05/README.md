@@ -18,3 +18,8 @@ The `e3` results wiht `7`. The reason for the result is higher order functions. 
 ### Answer: Question 2
 The output of the `e4` is a function closure for `f` with the parameter `y`. The reason for that is that the function `add` only creates a new function with the `x` parameter set to `2` in the end. In this way the function `f` still needs to have a value for parameter `y` before it can be evaluated.
 
+## PLC-ex6.2
+We have changed 
+- Absyn.fs at line 14
+- HigherFun.fs at line 33 and 62
+
