@@ -30,4 +30,4 @@ For this exercise we have changed the following files:
 - PLC-ex6.3/FunLex.fsl at line 33 and 59
 - PLC-ex6.3/FunPar.fsy at line 14, 16, and 58 
 
-All other files have been deleted, so if you wish to compile and run the project include the files from the book repository.
+All other files have been deleted, so if you wish to compile and run the project include the files from the book repository. Check the folders `compile.sh` for information on the necessary files.
