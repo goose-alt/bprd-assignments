@@ -83,7 +83,7 @@ val it : string = "('g -> ('h -> 'h))"
 val it : string = "(('l -> 'k) -> (('k -> 'm) -> ('l -> 'm)))"
 
 // ’a -> ’b 
-> infertype(fromstring @"
+> inferType(fromString @"
   let f =
     let x = x in 1 end
   in f end
@@ -92,4 +92,3 @@ val it : string = "('i -> 'j)"
 
 // TODO: 'a
 ```
-
