@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage[landscape,margin=0.5in]{geometry}
+\thispagestyle{empty}
+
+\usepackage{ebproof}
+\usepackage{amsmath}
+
+\begin{document}
+\include{shared.tex}
+
+\begin{prooftree}
+  \infer0[P1]{\rho[x\mapsto t_x, f\mapsto t_x\rightarrow t_r]\vdash 1 : \sint}
+  
+  \hypo{\rho(f) = \forall\alpha.\alpha \rightarrow\sint}
+  \infer1[P3]{\rho\vdash f : [t_x/\alpha]t_x \rightarrow\sint}
+
+  \hypo{\rho(f)=\forall\alpha.\alpha\rightarrow\sint}
+  \infer1[P3]{\rho\vdash f : [t_y/\alpha]t_y\rightarrow \sint}
+
+  \infer2[P4]{\rho[f\mapsto\forall\alpha.\alpha\rightarrow\sint]\vdash f f : \sint}
+
+  \infer2[P8]{\rho\vdash \slet f x = 1 \sin f f \send : \sint}
+\end{prooftree}
+\end{document}
+
