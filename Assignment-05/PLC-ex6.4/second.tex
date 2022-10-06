@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[landscape,margin=0.5in]{geometry}
+
+\thispagestyle{empty}
+
+\usepackage{ebproof}
+\usepackage{amsmath}
+
+
+\begin{document}
+\include{shared.tex}
+
+\begin{prooftree}
+  \infer0[P1]{\rho\vdash x : \sint}
+  \infer0[P1]{\rho\vdash 10 : \sint}
+  \infer2[P5]{\rho\vdash x < 10: \sbool}
+
+  \infer0[P1]{\rho\vdash 42 : \sint}
+
+  \hypo{\rho(f)=t_x\rightarrow\sint}
+  \infer1[P3]{\rho\vdash f : t_x \rightarrow\sint}
+
+  \infer0[P1]{\rho\vdash x : \sint}
+  \infer0[P1]{\rho\vdash 1 : \sint}
+  \infer2[P4]{\rho\vdash x + 1 : \sint}
+  \infer2[P9]{\rho\vdash f(x+1) : \sint}
+
+  \infer3[P7]{\rho[x\mapsto t_x, f\mapsto t_x\rightarrow \sint]\vdash \sif x < 10 \sthen 42 \selse f(x+1) : \sint}
+
+  \hypo{\rho(f)=\forall\alpha.\alpha\rightarrow\sint}
+  \infer1[P3]{\rho\vdash f : [t_x/\alpha]t_x\rightarrow\sint}
+  
+  \infer0[P1]{\rho\vdash 20 : \sint}
+  \infer2[P9]{\rho[f\mapsto\forall\alpha.\alpha.t_x\rightarrow\sint]\vdash f\; 20 : \sint}
+
+  \infer2[P8]{\rho\vdash\slet f\; x = \sif x < 10 \sthen 42 \selse f(x+1) \sin f\; 20 \send : \sint}
+\end{prooftree}
+\end{document}
+
