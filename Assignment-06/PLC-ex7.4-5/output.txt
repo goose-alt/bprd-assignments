@@ -1,0 +1,5 @@
+./compile.sh
+> open ParseAndRun;;
+> run (fromFile "test.c") [];;
+0 1 0 val it : Interp.store = map [(0, 0)]
+
