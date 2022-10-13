@@ -1,9 +1,12 @@
 # Assignment 05
 ## PLC-ex5.7
-Solution is in file `TypeInference.fs` line 56,110,139,153,183,189,230.
+Solution is in file `TypedFun.fs` line 40, 54, 61 and 144.
 
-It compiles, but is rather hard to check. Due to the wording of the assignment we have decided not to implement the list type on the parser which means there is no way to test the type inference on the language.
-
+Output example of an int list:
+```
+> typ (ListExp([CstI 1; CstI 2; CstI 3], TypI)) [];;
+val it: typ = TypL TypI
+```
 
 ## PLC-ex6.1
 We have not changed anything but we have builded and tried to run the examples in the description of the task. This output can be seen here: PLC-ex6.1/output.txt
