@@ -4,6 +4,16 @@ Run `compile.sh` in the docker container
 
 `cleanup.sh` is provided to remove all files created by the compilation process.
 
+## PLC-ex4.3
+Run `compile.sh`in the docker container.
+
+Changed files are the following:
+- PLC-ex7.3/CPar.fsy line 17, 103, 110
+- PLC-ex7.3/CLex.fsl line 31
+
+Also copied code files from PLC-ex7.2 renamed them to ex7.3xxx.c and change the while loops into for loops
+You can see the compiled output in their respective out files.
+
 ## PLC-ex7.4
 Placed in folder `PLC-ex7.4-5`
 
