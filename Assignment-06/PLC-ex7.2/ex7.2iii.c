@@ -17,9 +17,6 @@ void main(){
     print(freq[1]);
     print(freq[2]);
     print(freq[3]);
-    print(freq[4]);
-    print(freq[5]);
-    print(freq[6]);
 }
 
 void histogram(int n, int ns[], int max, int freq[]){
