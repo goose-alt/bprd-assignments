@@ -27,7 +27,7 @@ void histogram(int n, int ns[], int max, int freq[]){
     i = 0;
     while(i < n){
         int num;
-        num = arr[i];
+        num = ns[i];
         freq[num] = freq[num] + 1;
         i = i + 1;
     }
