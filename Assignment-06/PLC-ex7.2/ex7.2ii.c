@@ -2,10 +2,11 @@
 void main(){
     int arr[20]; 
 
-    result = squares(15, arr);
+    squares(15, arr);
 
     int *sump;
-    sum = arrsum(15, result, sump);
+    int sum;
+    sum = arrsum(15, arr, sump);
 
     print(sum);
 }
