@@ -9,7 +9,8 @@ Run `compile.sh` in the docker container
 Part i is in ex7.2i.c and the output is in ex7.2i.out
 Part ii is in ex7.2ii.c and the output is in ex7.2ii.out
 Part iii is in ex7.2iii.c and the output is in ex7.2iii.out
-## PLC-ex4.3
+
+## PLC-ex7.3
 Run `compile.sh`in the docker container.
 
 Changed files are the following:
