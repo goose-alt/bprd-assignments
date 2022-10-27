@@ -4,6 +4,10 @@ Run `compile.sh` in the docker container
 
 `cleanup.sh` is provided to remove all files created by the compilation process.
 
+## PLC-ex7.2
+Part i is in ex7.2i.c and the output is in ex7.2i.out
+Part ii is in ex7.2ii.c and the output is in ex7.2ii.out
+Part iii is in ex7.2iii.c and the output is in ex7.2iii.out
 ## PLC-ex7.4
 Placed in folder `PLC-ex7.4-5`
 
