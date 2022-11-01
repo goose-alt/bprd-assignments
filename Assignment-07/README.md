@@ -21,8 +21,8 @@ The program have three main events.
 
 First and foremost, we can see that we declare and assign the variable `i` from line 3 - 9.
 
-Then we want to start the loop. We do so by getting the value for variable `n` on the top of the stack. That happens from line 15-18.
-This stores the value 4. Then the program can now begin to compare `i` and `n` with the `LT` operator(line 19). After that the `IFNZRO` decides whether or not if we should continue the loop or stop by checking the value put on the top of the stack by the previous `LT`. 
+Then we want to start the loop. We do so by getting the value for variable `n` on the top of the stack. 
+This stores the value 4. Then the program can now begin to compare `i` and `n` with the `LT` operator(e.g. line 19). After that the `IFNZRO` decides whether or not if we should continue the loop or stop by checking the value put on the top of the stack by the previous `LT`. 
 Examples of this is repeated in the trace file at lines 15-20, 43-48, 71-76, 99-104, and 127-132
 
 Last but not least, the program has to increment `i` by doing the `i = i + 1`. This is being done by getting index of the `i` value. Then we try and get the current stored value of `i`. Afterwards we are putting the value 1 on top of the stack. Then we add the two values and store the result by using the `STI`. 
