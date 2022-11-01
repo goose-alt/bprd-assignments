@@ -2,7 +2,7 @@
 binDir=/data/bin
 currDir=$PWD
 
-cd ../MicroC/
+cd ../../MicroC/
 $binDir/compileLexer.sh C
 $binDir/compileParser.sh C
 $binDir/compileMachine.sh
