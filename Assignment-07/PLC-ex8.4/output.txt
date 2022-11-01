@@ -1,0 +1,15 @@
+### Part 1 - EX8 slower than prog1 ###
+
+In terms of the byte code in general then there are a lot of unecessary bytecode instructions in ex8.out.
+At line 24 in ex8.out we increase the stack pointer by 0 which does nothing. Also at 13-15 and 16-18 we 
+could have made it shorter by using the symbolic bytecode instruction `DUP`. 
+
+prog1 looks like that it utilizes the stack a lot better and for that reason doesn't need to get the variable 
+through an address but uses the top of the stack. 
+
+
+### Part 2 - EX13, how can you see loops and conditionals ###
+
+Conditionals and Loops are accomplished by using GOTO, IFZERO and IFNZRO so that it can skip the code that is not supposed to be executed.
+
+In the code there are 7 jumps present(i.e. IFZERO, IFNZRO, GOTO)

@@ -1,0 +1,7 @@
+0 20000000  # CST 20000000
+16 7        # GOTO bytecode 7 i.e. line 5 
+0 1         # CST 1
+2           # SUB 20000000 1
+9           # DUP the above result
+18 4        # IFNZRO, go to line 3 and remove top value on stack 
+25          # STOP
