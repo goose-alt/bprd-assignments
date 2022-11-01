@@ -5,7 +5,7 @@ All contained in `PLC-ex8.3` folder.
 
 Changed files are the following:
 - `CLex.fsl` line 53 and 54.
-- `CPar.fsy` line 18, 137 and 138
+- `CPar.fsy` line 18, 136 and 137
 - `Absyn.fs` line 26 and 27
 - `Comp.fs` line 209-212
 - `test.c` entire file, simply a test of the program.
