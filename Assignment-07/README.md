@@ -28,3 +28,27 @@ Ran 0.001 seconds
 ## PLC-ex8.4
 ## PLC-ex8.5
 ## PLC-ex8.6
+All contained in `PLC-ex8.6` folder.
+
+Changed files are the following:
+- `CLex.fsl` line 31,32 and 78.
+- `CPar.fsy` line 19, 22, 92-94 and 108
+- `Absyn.fs` line 38
+- `Comp.fs` line 147-157 
+- `test.c` entire file, simply a test of the program.
+
+
+```
+
+$ ./compile.sh
+...compilation output
+
+> open ParseAndComp;;
+> compileToFile (fromFile "test.c") "test";;
+...instruction output
+> #quit;;
+
+$ java Machine test 1
+31 4
+Ran 0.001 seconds
+```

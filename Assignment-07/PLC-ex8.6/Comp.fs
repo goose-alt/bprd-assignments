@@ -144,6 +144,17 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       [RET (snd varEnv - 1)]
     | Return (Some e) -> 
       cExpr e varEnv funEnv @ [RET (snd varEnv)]
+    | Switch (e, caselst) ->
+      let labend = newLabel()
+      let switchExpr = cExpr e varEnv funEnv
+      
+      let labels = List.map(fun c -> (newLabel(), c)) caselst
+
+      let caseLabels = List.fold(fun acc (lab, (c, stmt)) -> acc @ [DUP; CSTI c; EQ; IFNZRO lab]) [] labels
+
+      let caseBlocks = List.fold(fun acc (lab, (c, stmt)) -> acc @ [Label lab] @ cStmt stmt varEnv funEnv @ [GOTO labend]) [] labels
+
+      switchExpr @ caseLabels @ [RET -1] @ caseBlocks @ [Label labend; INCSP -1]
 
 and cStmtOrDec stmtOrDec (varEnv : varEnv) (funEnv : funEnv) : varEnv * instr list = 
     match stmtOrDec with 
