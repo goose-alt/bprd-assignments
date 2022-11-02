@@ -32,6 +32,10 @@ Changes in CLex.fsl: line 80-81
 Changes in CPar.fsy: line 23, 136
 
 Changes in Absyn.fs: line 38
+
+Changes in Comp.fs: line 125-131
+
+Test method in TernaryTest.c
 ## PLC-ex8.6
 All contained in `PLC-ex8.6` folder.
 
