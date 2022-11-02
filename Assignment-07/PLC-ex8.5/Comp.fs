@@ -121,7 +121,14 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       cExpr e varEnv funEnv @ [IFZERO labelse] 
       @ cStmt stmt1 varEnv funEnv @ [GOTO labend]
       @ [Label labelse] @ cStmt stmt2 varEnv funEnv
-      @ [Label labend]           
+      @ [Label labend] 
+    | Ternary (expr1, expr2, expr3) -> 
+      let labelse = newLabel()
+      let labend  = newLabel()
+      cExpr expr1 varEnv funEnv @ [IFZERO labelse] 
+      @ cExpr expr2 varEnv funEnv @ [GOTO labend]
+      @ [Label labelse] @ cExpr expr3 varEnv funEnv
+      @ [Label labend]          
     | While(e, body) ->
       let labbegin = newLabel()
       let labtest  = newLabel()
@@ -205,13 +212,6 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) : instr list =
       @ cExpr e2 varEnv funEnv
       @ [GOTO labend; Label labtrue; CSTI 1; Label labend]
     | Call(f, es) -> callfun f es varEnv funEnv
-    | Ternary (expr1, expr2, expr3) -> 
-      let labelse = newLabel()
-      let labend  = newLabel()
-      cExpr expr1 varEnv funEnv @ [IFZERO labelse] 
-      @ cExpr expr2 varEnv funEnv @ [GOTO labend]
-      @ [Label labelse] @ cExpr expr3 varEnv funEnv
-      @ [Label labend]
 
 (* Generate code to access variable, dereference pointer or index array.
    The effect of the compiled code is to leave an lvalue on the stack.   *)
