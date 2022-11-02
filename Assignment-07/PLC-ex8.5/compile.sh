@@ -7,7 +7,7 @@ $currDir/compileLexer.sh C
 $currDir/compileParser.sh C
 $binDir/compileMachine.sh
 
-cp Parse.fs Machine.fs Comp.fs ParseAndComp.fs $currDir 
+cp Parse.fs Machine.fs ParseAndComp.fs $currDir 
 cp Machine.class $currDir 
 cd $currDir 
 
