@@ -1,0 +1,76 @@
+24              # LDARGS 
+19 1 5          # CALL 1 argument instruction 5
+25 
+
+15 1            # INCSP 1
+13              # GETBP
+0 1             # CSTI 1 
+1               # ADD 
+0 1889          # CSTI 1889 
+12              # STI
+15 -1           # INCSP -1
+16 95           # GOTO instruction 95 
+13              # GETBP
+0 1             # CSTI 1
+1               # ADD 
+13              # GETBP
+0 1             # CSTI 1
+1               # ADD                                   # instruction 25
+11              # LDI
+0 1             # CSTI 1
+1               # ADD 
+12              # STI 
+15 -1           # INCSP -1
+13              # GETBP
+0 1             # CSTI 1
+1               # ADD 
+11              # LDI 
+0 4             # CSTI 4 
+5               # MOD 
+0 0             # CSTI 0 
+6               # EQ 
+17 77           # IFZERO go to instruction 77 
+13              # GETBP 
+0 1             # CSTI 1 
+1               # ADD
+11              # LDI                                   # Instruction 50
+0 100           # CSTI 100 
+5               # MOD 
+0 0             # CSTI 0 
+6               # EQ 
+8               # NOT 
+18 73           # IFNZERO go to instruction 73 
+13              # GETBP 
+0 1             # CSTI 1 
+1               # ADD 
+11              # LDI 
+0 400           # CSTI 400 
+5               # MOD 
+0 0             # CSTI 0 
+6               # EQ 
+16 75           # GOTO instruction 75 
+0 1             # CSTI 1 
+16 79           # GOTO instruction 79 
+0 0             # CSTI 0
+17 91           # IFZERO 91 
+13              # GETBP                                 # Instruction 81
+0 1             # CSTI 1 
+1               # ADD 
+11              # LDI 
+22              # PRINTI 
+15 -1           # INCSP -1 
+16 93           # GOTO instruction 93 
+15 0            # INCSP 0 
+15 0            # INCSP 0 
+13              # GETPBP                                # Instruction 95
+0 1             # CSTI 1 
+1               # ADD 
+11              # LDI 
+13              # GETBP 
+0 0             # CSTI 0 
+1               # ADD 
+11              # LDI 
+7               # LT                                    # instruction 105
+18 18           # IFNZRO goto instruction 18 
+15 -1           # INCSP -1 
+21 0            # RET 0
