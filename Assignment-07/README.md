@@ -54,9 +54,20 @@ Ran 0.001 seconds
 ```
 
 ## PLC-ex8.4
-## PLC-ex8.5
 All answers have been answered in the:
 - PLC-ex8.4/output.txt
+
+## PLC-ex8.5
+Changes in CLex.fsl: line 80-81
+
+Changes in CPar.fsy: line 23, 104
+
+Changes in Absyn.fs: line 38
+
+Changes in Comp.fs: line 125-131
+
+Test method in TernaryTest.c
+Test output in TernaryTest.out
 
 ## PLC-ex8.6
 All contained in `PLC-ex8.6` folder.
