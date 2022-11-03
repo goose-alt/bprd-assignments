@@ -339,12 +339,12 @@ and Token  lexbuf =
           )
   | 31 -> ( 
 # 80 "CLex.fsl"
-                                    QUES
+                                     QUES 
 # 343 "CLex.fs"
           )
   | 32 -> ( 
 # 81 "CLex.fsl"
-                                    COLON
+                                     COLON 
 # 348 "CLex.fs"
           )
   | 33 -> ( 
