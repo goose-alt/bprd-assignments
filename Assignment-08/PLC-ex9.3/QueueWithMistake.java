@@ -29,7 +29,7 @@ class QueueWithMistake {
   }
 
   private static void runThreads(final int threads, final Queue queue) {
-    final int iterations = 200000000; // Increase this constant if program does not run out of memory.
+    final int iterations = 2000000000; // Increase this constant if program does not run out of memory.
     final Timer timer = new Timer();
     Thread[] ts = new Thread[threads];
     queue.put(-6);
@@ -40,21 +40,31 @@ class QueueWithMistake {
     queue.put(-1);
     for (int j=0; j<threads; j++)
       ts[j] = new Thread() {
-          public void run() {
-            for (int i=0; i<iterations; i++) {
-              queue.put(i);
-              queue.get();
-            }
+
+        public void run() {
+
+          for (int i=0; i<iterations; i++) {
+
+            queue.put(i);
+            queue.get();
           }
-        };
+        }
+      };
+
+    // Start threads
     for (int j=0; j<threads; j++)
       ts[j].start();
+
     try {
+
       for (int j=0; j<threads; j++)
-	  ts[j].join();  // Wait for thread j to terminate.
+	      ts[j].join();  // Wait for thread j to terminate.
+
     } catch (Exception exn) {
+
       System.out.println(exn);
     }
+
     System.out.printf("%-20s\t%4d\t%7.2f\t%s%n", 
                       queue.getClass().getName(), threads, timer.Check(), queue.get());
   }
@@ -86,7 +96,7 @@ class SentinelLockQueue implements Queue {
     }
   }
 
-  private final Node dummy = new Node(-444, null);
+  private final Node dummy = new Node(-444, null); 
   private Node head = dummy, tail = dummy;
   
   public synchronized boolean put(int item) {
@@ -99,8 +109,9 @@ class SentinelLockQueue implements Queue {
   public synchronized int get() {
     if (head.next == null) 
       return -999;
-    Node first = head;
-    head = first.next;
+    Node first = head; 
+    head = head.next;  
+    first.next = null;
     return head.item;
   }
 }
